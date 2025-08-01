@@ -1,12 +1,399 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myanmar Phone Service Tools Shop</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #2E7D32;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --footer-bg: rgba(255, 255, 255, 0.9);
+            --tool-item-bg: rgba(0, 0, 0, 0.05);
+            --license-bg: rgba(76, 175, 80, 0.1);
+            --input-bg: #fff;
+        }
+
+        .dark-mode {
+            --primary-color: #4CAF50;
+            --secondary-color: #81C784;
+            --text-color: #f5f5f5;
+            --bg-color: #121212;
+            --card-bg: rgba(30, 30, 30, 0.9);
+            --header-bg: rgba(0, 0, 0, 0.8);
+            --footer-bg: rgba(0, 0, 0, 0.8);
+            --tool-item-bg: rgba(255, 255, 255, 0.1);
+            --license-bg: rgba(76, 175, 80, 0.2);
+            --input-bg: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1501854140801-50d01698950b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: var(--header-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .license-options {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .license-option {
+            background-color: var(--license-bg);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 10px;
+            flex: 1;
+            min-width: 120px;
+            transition: transform 0.3s;
+        }
+
+        .license-option:hover {
+            transform: translateY(-5px);
+            background-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tool-item {
+            background-color: var(--tool-item-bg);
+            padding: 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        .tool-item:hover {
+            background-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .tool-item:before {
+            content: "✓";
+            color: var(--primary-color);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 30px auto;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            width: 250px;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--tool-item-bg);
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 120px;
+        }
+
+        .payment-method img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .notification-form {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .notification-form input {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            width: 300px;
+            max-width: 100%;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+        .notification-form button {
+            padding: 12px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .notification-form button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: var(--footer-bg);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .tools-list {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .license-options {
+                flex-direction: column;
+            }
+            
+            .notification-form input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .notification-form button {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle">
+        <span id="themeIcon">🌙</span> <span id="themeText">Dark Mode</span>
+    </button>
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
+    <div class="container">
+        <header>
+            <h1>All Tools Available at Our Shop</h1>
+            <p class="subtitle">Professional Software & Hardware Solutions</p>
+            <div class="license-options">
+                <div class="license-option">
+                    <h3>3 Months</h3>
+                    <p>License</p>
+                </div>
+                <div class="license-option">
+                    <h3>6 Months</h3>
+                    <p>License</p>
+                </div>
+                <div class="license-option">
+                    <h3>12 Months</h3>
+                    <p>License</p>
+                </div>
+            </div>
+            <p>Credit Available – Short-Term Licenses</p>
+        </header>
 
+        <div class="card">
+            <h2>Available Tools</h2>
+            <div class="tools-list">
+                <div class="tool-item">Xiaomi Multi Auth Tool</div>
+                <div class="tool-item">Unlock Tool</div>
+                <div class="tool-item">MCT Tool</div>
+                <div class="tool-item">BD Auth Tool</div>
+                <div class="tool-item">Global Tool</div>
+                <div class="tool-item">EME Tool</div>
+                <div class="tool-item">ANDROID Multi Tool</div>
+                <div class="tool-item">CHI Mobile Tool</div>
+                <div class="tool-item">TSM Tool</div>
+                <div class="tool-item">GLOBAL Unlocker</div>
+                <div class="tool-item">GRIFFIN Unlock</div>
+                <div class="tool-item">TFM Tool Pro</div>
+                <div class="tool-item">MRAUTH Tool</div>
+                <div class="tool-item">DZKJ Tool</div>
+                <div class="tool-item">XINZHIZAO Tool</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>UNLOCK TOOL</h2>
+            <p>All Tools Available at Our Shop</p>
+            
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Wave_Money_Logo.svg/1200px-Wave_Money_Logo.svg.png" alt="Wave Pay">
+                    <span>Wave Pay</span>
+                </div>
+                <div class="payment-method">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/KBZ_Pay_logo.svg/1200px-KBZ_Pay_logo.svg.png" alt="KBZ Pay">
+                    <span>KBZ Pay</span>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:globelmyint@gmail.com">globalmyint@gmail.com</a></p>
+                <p>Email: <a href="mailto:servicezdd@gmail.com">servicezdd@gmail.com</a></p>
+                <p>Phone: <a href="tel:09427630313">09427630313</a></p>
+            </div>
+            
+            <div class="notification-form">
+                <h3>Get Notified About New Tools</h3>
+                <input type="email" id="emailInput" placeholder="Enter your email address">
+                <button id="subscribeBtn">Subscribe</button>
+            </div>
+        </div>
+
+        <a href="https://unlocktool.net" class="btn">Download Now</a>
+
+        <footer>
+            <p>&copy; 2025 Phone Service Tools Shop. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Dark/Light mode toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.textContent = '🌙';
+                themeText.textContent = 'Dark Mode';
+            }
+        });
+        
+        // Notification subscription
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const emailInput = document.getElementById('emailInput');
+        
+        subscribeBtn.addEventListener('click', () => {
+            const email = emailInput.value;
+            
+            if (email && email.includes('@') && email.includes('.')) {
+                alert('Thank you for subscribing! We will notify you about new tools.');
+                emailInput.value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+    </script>
 </body>
 </html>
